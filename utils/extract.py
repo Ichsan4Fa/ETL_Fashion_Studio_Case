@@ -44,12 +44,12 @@ def extract_fashion_data(container):
         size = details[2]
         gender = details[3]
         products = {
-            "title": title,
-            "price": price,
-            "rating": rating,
-            "color": color,
-            "size": size,
-            "gender": gender
+            "Title": title,
+            "Price": price,
+            "Rating": rating,
+            "Colors": color,
+            "Size": size,
+            "Gender": gender
         }
         return products
     except AttributeError as e:
@@ -89,13 +89,3 @@ def scrape_products(base_url, start_page=2, end_page=50, min_delay=3, max_delay=
         delay = random.uniform(min_delay, max_delay)
         time.sleep(delay)  # Be polite and avoid overwhelming the server
     return all_products
-
-def main():
-    base_url = "https://fashion-studio.dicoding.dev"
-    products = scrape_products(base_url)
-    df = pd.DataFrame(products)
-    if not df.empty:
-        print(df.head())
-
-if __name__ == "__main__":
-    main()
