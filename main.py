@@ -10,7 +10,7 @@ def main():
         df = transform_to_dataframe(products)
         print(f"Scraped data:")
         print(df.head())
-        transform_df = transform_data(df, rupiah_exchange = 17500)
+        transform_df = transform_data(df, rupiah_exchange = 16000)
         print(f"Transformed data: ")
         print(transform_df.head())
     
