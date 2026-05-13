@@ -37,7 +37,7 @@ def extract_fashion_data(container):
     try:
         title = container.find("h3", class_="product-title").text
         price_span = container.find("div", class_="price-container")
-        price = price_span.find("span", class_="price").text
+        price = price_span.find("span", class_="price").text.replace('$', '')
         details = container.select("p")
         rating = details[0].text.replace('Rating: ⭐ ', '').replace(' / 5','')
         color = details[1].text.replace(' Colors','')
