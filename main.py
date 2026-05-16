@@ -25,10 +25,10 @@ def main():
         print("No data to transform.")
     
     try:
-        load_to_csv(transform_df, "transformed_data.csv")
+        load_to_csv(transform_df, "products.csv")
         print("Data loaded to CSV successfully.")
-        load_to_postgres(transform_df, "postgresql://developer:supersecretpassword@localhost:5432/productdb")
-        load_to_google_sheets(transform_df, "1a2b3c4d5e6f7g8h9i0j", "Sheet1", "credentials.json")
+        load_to_postgres(transform_df, "products", "postgresql://developer:supersecretpassword@localhost:5432/productdb")
+        load_to_google_sheets(transform_df, "1Ljcrhwxhk7aOJnjIH5yX8tY6x88FiIf7x6oL2Dhf7gk", "Sheet1", "google-sheets-api.json")
     except Exception as e:
         print(f"Error occurred while loading data: {e}")
 
