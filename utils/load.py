@@ -10,7 +10,7 @@ def load_to_postgres(data, table_name, connector):
     try:
         engine = create_engine(connector)
         with engine.connect() as connection:
-            data.to_sql(table_name, con=engine, if_exists='replace', index=False)
+            data.to_sql(table_name, con=connection, if_exists='replace', index=False)
             print(f"Data loaded to database succesfully")
     except Exception as e:
         print(f"Error occurs during loading: {e}")
