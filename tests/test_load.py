@@ -29,18 +29,18 @@ class TestLoadToPostgres:
         # Mock the engine and connection
         mock_connection = MagicMock()
         mock_engine = MagicMock()
-        mock_engine.connection.return_value.__enter__ = MagicMock(return_value=mock_connection)
-        mock_engine.connection.return_value.__exit__ = MagicMock(return_value=None)
+        mock_engine.connect.return_value.__enter__ = MagicMock(return_value=mock_connection)
+        mock_engine.connect.return_value.__exit__ = MagicMock(return_value=None)
         mock_create_engine.return_value = mock_engine
         
         # Call the function
-        load_to_postgres(data, "test_table", "postgresql://user:pass@localhost/db")
+        load_to_postgres(data, "test_table", "postgresql://developer:supersecretpassword@localhost:5432/productdb")
         
         # Verify engine was created
-        mock_create_engine.assert_called_once_with("postgresql://user:pass@localhost/db")
+        mock_create_engine.assert_called_once_with("postgresql://developer:supersecretpassword@localhost:5432/productdb")
         
         # Verify connection was used
-        assert mock_engine.connection.called
+        assert mock_engine.connect.called
     
     @patch('utils.load.create_engine')
     def test_load_to_postgres_with_replace(self, mock_create_engine):
@@ -56,15 +56,15 @@ class TestLoadToPostgres:
         
         mock_connection = MagicMock()
         mock_engine = MagicMock()
-        mock_engine.connection.return_value.__enter__ = MagicMock(return_value=mock_connection)
-        mock_engine.connection.return_value.__exit__ = MagicMock(return_value=None)
+        mock_engine.connect.return_value.__enter__ = MagicMock(return_value=mock_connection)
+        mock_engine.connect.return_value.__exit__ = MagicMock(return_value=None)
         mock_create_engine.return_value = mock_engine
         
-        load_to_postgres(data, "products", "postgresql://user:pass@localhost/db")
+        load_to_postgres(data, "products", "postgresql://developer:supersecretpassword@localhost:5432/productdb")
         
         # Verify to_sql was called
         mock_connection.to_sql = MagicMock()
-        assert mock_engine.connection.called
+        assert mock_engine.connect.called
     
     @patch('utils.load.create_engine')
     def test_load_to_postgres_connection_error(self, mock_create_engine):
@@ -87,14 +87,14 @@ class TestLoadToPostgres:
         
         mock_connection = MagicMock()
         mock_engine = MagicMock()
-        mock_engine.connection.return_value.__enter__ = MagicMock(return_value=mock_connection)
-        mock_engine.connection.return_value.__exit__ = MagicMock(return_value=None)
+        mock_engine.connect.return_value.__enter__ = MagicMock(return_value=mock_connection)
+        mock_engine.connect.return_value.__exit__ = MagicMock(return_value=None)
         mock_create_engine.return_value = mock_engine
         
-        load_to_postgres(data, "empty_table", "postgresql://user:pass@localhost/db")
+        load_to_postgres(data, "empty_table", "postgresql://developer:supersecretpassword@localhost:5432/productdb")
         
         # Verify engine was created even with empty data
-        mock_create_engine.assert_called_once_with("postgresql://user:pass@localhost/db")
+        mock_create_engine.assert_called_once_with("postgresql://developer:supersecretpassword@localhost:5432/productdb")
     
     @patch('utils.load.create_engine')
     def test_load_to_postgres_large_dataset(self, mock_create_engine):
@@ -111,14 +111,14 @@ class TestLoadToPostgres:
         
         mock_connection = MagicMock()
         mock_engine = MagicMock()
-        mock_engine.connection.return_value.__enter__ = MagicMock(return_value=mock_connection)
-        mock_engine.connection.return_value.__exit__ = MagicMock(return_value=None)
+        mock_engine.connect.return_value.__enter__ = MagicMock(return_value=mock_connection)
+        mock_engine.connect.return_value.__exit__ = MagicMock(return_value=None)
         mock_create_engine.return_value = mock_engine
         
-        load_to_postgres(data, "large_table", "postgresql://user:pass@localhost/db")
+        load_to_postgres(data, "large_table", "postgresql://developer:supersecretpassword@localhost:5432/productdb")
         
         # Verify engine was created
-        mock_create_engine.assert_called_once_with("postgresql://user:pass@localhost/db")
+        mock_create_engine.assert_called_once_with("postgresql://developer:supersecretpassword@localhost:5432/productdb")
     
     @patch('utils.load.create_engine')
     def test_load_to_postgres_different_table_names(self, mock_create_engine):
@@ -127,13 +127,13 @@ class TestLoadToPostgres:
         
         mock_connection = MagicMock()
         mock_engine = MagicMock()
-        mock_engine.connection.return_value.__enter__ = MagicMock(return_value=mock_connection)
-        mock_engine.connection.return_value.__exit__ = MagicMock(return_value=None)
+        mock_engine.connect.return_value.__enter__ = MagicMock(return_value=mock_connection)
+        mock_engine.connect.return_value.__exit__ = MagicMock(return_value=None)
         mock_create_engine.return_value = mock_engine
         
         # Test with different table names
         for table_name in ["products", "fashion_items", "my_table"]:
-            load_to_postgres(data, table_name, "postgresql://user:pass@localhost/db")
+            load_to_postgres(data, table_name, "postgresql://developer:supersecretpassword@localhost:5432/productdb")
         
         # Verify engine creation happened for each call
         assert mock_create_engine.call_count == 3

@@ -77,7 +77,7 @@ class TestTransformData:
         transformed_df = transform_data(df, 16000)
         
         assert transformed_df.iloc[0]["Title"] == "Product 1"
-        assert transformed_df.iloc[0]["Price"] == "$50"
+        assert transformed_df.iloc[0]["Price"] == 800000.0
         assert transformed_df.iloc[0]["Rating"] == 4.5
         assert transformed_df.iloc[0]["Colors"] == 2
         assert transformed_df.iloc[0]["Size"] == "M"
